@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>miquincho.com.py — Quinchos diseñados y construidos en Paraguay</title>
+<meta name="description" content="Tres diseños de quincho con parrilla, llave en mano. Diseñados y construidos por Hause. Pedí tu cotización por WhatsApp." />
+
+<!-- Open Graph (para que los anuncios y WhatsApp muestren bien el link) -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://miquincho.com.py/" />
+<meta property="og:title" content="Miquincho — Quinchos llave en mano" />
+<meta property="og:description" content="Tres diseños de quincho con parrilla, diseño + obra por Hause. Pedí tu cotización." />
+<meta property="og:image" content="https://miquincho.com.py/og-miquincho.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Quincho llave en mano por Miquincho" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+<style>
+/* =====================================================================
+   quincho.com.py — sistema de diseño
+   Dirección: "la brasa". Carbón cálido (no negro plano) + brasa naranja-roja,
+   ladrillo paraguayo como segundo material, hueso/ceniza para secciones claras.
+   Firma: el resplandor de brasa + el divisor "parrilla" (rejilla horizontal)
+   que hereda las tres barras del logo Hause.
+   ===================================================================== */
+:root{
+  --carbon:#16110D;       /* lecho de carbón, casi negro pero cálido */
+  --carbon-2:#1F1813;
+  --ember:#E2491F;        /* brasa viva — CTA / acento principal */
+  --flame:#F2A33C;        /* llama ámbar — para degradados/realces */
+  --brick:#9E4A2E;        /* ladrillo visto */
+  --ash:#C9BFB2;          /* ceniza cálida */
+  --bone:#F6F1E7;         /* fondo claro */
+  --bone-2:#EFE7D8;
+  --ink:#211B16;          /* texto sobre claro */
+  --ink-soft:#5B5046;
+  --line:rgba(33,27,22,.14);
+  --line-dark:rgba(246,241,231,.14);
+
+  --display:'Fraunces', Georgia, 'Times New Roman', serif;
+  --body:'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+
+  --maxw:1180px;
+  --r:18px;
+  --shadow:0 24px 60px -24px rgba(22,17,13,.55);
+  --ember-glow:0 0 0 1px rgba(226,73,31,.35), 0 14px 40px -10px rgba(226,73,31,.45);
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;font-family:var(--body);color:var(--ink);background:var(--bone);
+  -webkit-font-smoothing:antialiased;line-height:1.55;
+}
+img{max-width:100%;display:block}
+a{color:inherit}
+h1,h2,h3{font-family:var(--display);font-weight:600;line-height:1.04;margin:0;letter-spacing:-.01em}
+p{margin:0}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+.eyebrow{font-size:.72rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--ember)}
+.sect{padding:88px 0}
+.sect--dark{background:var(--carbon);color:var(--bone)}
+.sect--brick{background:linear-gradient(180deg,var(--bone) 0%, var(--bone-2) 100%)}
+
+/* botones */
+.btn{display:inline-flex;align-items:center;gap:.55rem;border:none;cursor:pointer;
+  font-family:var(--body);font-weight:600;font-size:1rem;border-radius:999px;
+  padding:.92rem 1.5rem;text-decoration:none;transition:transform .15s ease, box-shadow .2s ease, background .2s ease}
+.btn:focus-visible{outline:3px solid var(--flame);outline-offset:3px}
+.btn--ember{background:linear-gradient(180deg,var(--flame),var(--ember));color:#fff;box-shadow:var(--ember-glow)}
+.btn--ember:hover{transform:translateY(-2px)}
+.btn--ghost{background:transparent;color:inherit;border:1.5px solid currentColor;opacity:.92}
+.btn--ghost:hover{opacity:1;transform:translateY(-2px)}
+.btn--wa{background:#1faa55;color:#fff}
+.btn--wa:hover{transform:translateY(-2px);box-shadow:0 14px 36px -12px rgba(31,170,85,.6)}
+.btn--block{width:100%;justify-content:center}
+
+/* ---------- barra promo ---------- */
+.promobar{background:linear-gradient(90deg,var(--ember),var(--brick));color:#fff;
+  font-size:.88rem;font-weight:500;text-align:center;padding:.6rem 18px;position:relative;z-index:60}
+.promobar[hidden]{display:none}
+.promobar b{font-weight:700}
+
+/* ---------- header ---------- */
+.head{position:sticky;top:0;z-index:50;background:rgba(22,17,13,.82);
+  backdrop-filter:saturate(140%) blur(10px);color:var(--bone);border-bottom:1px solid var(--line-dark)}
+.head__in{display:flex;align-items:center;justify-content:space-between;height:68px}
+.brand{display:flex;align-items:center;gap:.6rem;text-decoration:none;color:var(--bone)}
+.brand__mark{width:34px;height:34px;flex:0 0 auto;color:var(--ember)}
+.brand__txt{display:flex;flex-direction:column;line-height:1}
+.brand__name{font-weight:700;font-size:1.06rem;letter-spacing:-.02em}
+.brand__name span{color:var(--ash);font-weight:500}
+.brand__tag{font-size:.56rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ash);margin-top:3px}
+.nav{display:flex;align-items:center;gap:1.6rem}
+.nav a{text-decoration:none;font-size:.92rem;font-weight:500;color:var(--ash);transition:color .15s}
+.nav a:hover{color:var(--bone)}
+.head .btn{padding:.62rem 1.05rem;font-size:.9rem}
+.navtoggle{display:none}
+
+/* ---------- hero ---------- */
+.hero{position:relative;background:var(--carbon);color:var(--bone);overflow:hidden;
+  padding:96px 0 90px}
+.hero__glow{position:absolute;inset:auto -10% -40% 30%;height:120%;
+  background:radial-gradient(60% 60% at 50% 50%, rgba(226,73,31,.55), rgba(242,163,60,.18) 40%, transparent 70%);
+  filter:blur(8px);pointer-events:none;animation:breathe 7s ease-in-out infinite}
+@keyframes breathe{0%,100%{opacity:.85;transform:scale(1)}50%{opacity:1;transform:scale(1.06)}}
+.hero__in{position:relative;z-index:2;display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
+.hero h1{font-size:clamp(2.6rem,5.6vw,4.6rem);margin:.5rem 0 .2rem}
+.hero h1 em{font-style:italic;color:var(--flame)}
+.hero__lead{font-size:1.12rem;color:var(--ash);max-width:34ch;margin:1rem 0 1.7rem}
+.hero__cta{display:flex;gap:.8rem;flex-wrap:wrap}
+.hero__trust{display:flex;gap:1.6rem;margin-top:2.2rem;flex-wrap:wrap}
+.hero__trust div{display:flex;flex-direction:column}
+.hero__trust b{font-family:var(--display);font-size:1.7rem;color:var(--bone)}
+.hero__trust span{font-size:.78rem;color:var(--ash);letter-spacing:.02em}
+.hero__media{aspect-ratio:4/3;border-radius:var(--r);overflow:hidden;position:relative;
+  box-shadow:var(--shadow);border:1px solid var(--line-dark)}
+.hero__media img{width:100%;height:100%;object-fit:cover}
+
+/* slot de render (placeholder mientras llegan las imágenes) */
+.slot{position:relative;width:100%;height:100%;display:grid;place-items:center;text-align:center;
+  background:
+    repeating-linear-gradient(135deg,rgba(246,241,231,.04) 0 2px,transparent 2px 22px),
+    linear-gradient(160deg,var(--brick),var(--carbon-2));color:var(--ash)}
+.slot small{display:block;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;opacity:.8;margin-top:.4rem}
+.slot svg{opacity:.55}
+
+/* ---------- divisor parrilla (firma) ---------- */
+.grate{height:26px;background:
+   repeating-linear-gradient(90deg,var(--carbon) 0 6px,transparent 6px 26px);
+   opacity:.16}
+.sect--dark .grate{background:repeating-linear-gradient(90deg,var(--bone) 0 6px,transparent 6px 26px);opacity:.12}
+
+/* ---------- valor ---------- */
+.values{display:grid;grid-template-columns:repeat(4,1fr);gap:26px;margin-top:42px}
+.value{padding:0}
+.value .ico{width:46px;height:46px;color:var(--ember);margin-bottom:.7rem}
+.value h3{font-size:1.18rem;margin-bottom:.35rem}
+.value p{color:var(--ink-soft);font-size:.96rem}
+
+/* ---------- diseños ---------- */
+.designs{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:46px}
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;
+  display:flex;flex-direction:column;box-shadow:0 18px 40px -28px rgba(22,17,13,.4)}
+.card__media{aspect-ratio:4/3;position:relative}
+.card__tag{position:absolute;top:14px;left:14px;background:var(--carbon);color:var(--bone);
+  font-size:.72rem;font-weight:600;letter-spacing:.04em;padding:.32rem .7rem;border-radius:999px}
+.card__off{position:absolute;top:14px;right:14px;background:linear-gradient(180deg,var(--flame),var(--ember));
+  color:#fff;font-weight:700;font-size:.82rem;padding:.36rem .7rem;border-radius:999px;
+  box-shadow:0 0 0 4px rgba(226,73,31,.18), 0 8px 22px -6px rgba(226,73,31,.6)}
+.card__off[hidden]{display:none}
+.card__body{padding:22px 22px 24px;display:flex;flex-direction:column;flex:1}
+.card__name{font-size:1.5rem}
+.card__sub{color:var(--ember);font-weight:600;font-size:.82rem;letter-spacing:.04em;text-transform:uppercase;margin:.2rem 0 .6rem}
+.card__blurb{color:var(--ink-soft);font-size:.95rem;margin-bottom:1rem}
+.card__feats{list-style:none;padding:0;margin:0 0 1.2rem;display:flex;flex-direction:column;gap:.5rem}
+.card__feats li{font-size:.92rem;display:flex;gap:.55rem;align-items:flex-start;color:var(--ink)}
+.card__feats li::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--ember);margin-top:.5rem;flex:0 0 auto}
+.card__price{margin-top:auto;display:flex;align-items:baseline;gap:.6rem;margin-bottom:1rem}
+.card__from{font-size:.78rem;color:var(--ink-soft)}
+.card__now{font-family:var(--display);font-size:1.9rem;font-weight:600}
+.card__was{font-size:1rem;color:var(--ink-soft);text-decoration:line-through}
+
+/* ---------- proceso ---------- */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:26px;margin-top:42px;counter-reset:s}
+.step{position:relative;padding-top:1.2rem}
+.step::before{counter-increment:s;content:"0" counter(s);font-family:var(--display);font-size:1.1rem;
+  color:var(--ember);font-weight:600;display:block;margin-bottom:.5rem}
+.step h3{font-size:1.12rem;margin-bottom:.3rem}
+.step p{color:var(--ash);font-size:.94rem}
+.sect--brick .step p{color:var(--ink-soft)}
+
+/* ---------- prueba social ---------- */
+.proof{display:grid;grid-template-columns:.8fr 1.2fr;gap:48px;align-items:center}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:30px}
+.stat b{font-family:var(--display);font-size:2.6rem;display:block;color:var(--ember);line-height:1}
+.stat span{font-size:.9rem;color:var(--ink-soft)}
+.quotes{display:flex;flex-direction:column;gap:18px}
+.quote{background:#fff;border:1px solid var(--line);border-left:3px solid var(--ember);
+  border-radius:12px;padding:18px 20px}
+.quote p{font-size:1rem;color:var(--ink)}
+.quote cite{display:block;margin-top:.6rem;font-style:normal;font-size:.84rem;color:var(--ink-soft)}
+
+/* ---------- formulario / conversión ---------- */
+.lead{background:var(--carbon);color:var(--bone)}
+.lead__in{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+.lead h2{font-size:clamp(2rem,4vw,3rem)}
+.lead__lead{color:var(--ash);margin:1rem 0 1.4rem;max-width:38ch}
+.lead__assure{list-style:none;padding:0;margin:1.6rem 0 0;display:flex;flex-direction:column;gap:.7rem}
+.lead__assure li{display:flex;gap:.6rem;align-items:center;color:var(--ash);font-size:.94rem}
+.lead__assure svg{color:var(--flame);flex:0 0 auto}
+.form{background:rgba(246,241,231,.04);border:1px solid var(--line-dark);border-radius:var(--r);padding:26px}
+.field{margin-bottom:14px}
+.field label{display:block;font-size:.82rem;font-weight:600;margin-bottom:.35rem;color:var(--bone)}
+.field input,.field select,.field textarea{width:100%;font-family:var(--body);font-size:1rem;
+  background:rgba(22,17,13,.5);border:1px solid var(--line-dark);color:var(--bone);
+  border-radius:12px;padding:.8rem .9rem}
+.field input::placeholder,.field textarea::placeholder{color:rgba(201,191,178,.6)}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--flame);
+  box-shadow:0 0 0 3px rgba(242,163,60,.25)}
+.field--err input,.field--err select{border-color:var(--ember)}
+.field .err{display:none;color:#ffb4a1;font-size:.78rem;margin-top:.3rem}
+.field--err .err{display:block}
+.form__note{font-size:.78rem;color:var(--ash);margin-top:.5rem;text-align:center}
+.form__ok{display:none;text-align:center;padding:18px 6px}
+.form__ok h3{font-size:1.5rem;margin-bottom:.4rem}
+.form__ok p{color:var(--ash);margin-bottom:1.2rem}
+.is-done .form__fields{display:none}
+.is-done .form__ok{display:block}
+
+/* ---------- FAQ ---------- */
+.faq{max-width:780px;margin:42px auto 0}
+.qa{border-bottom:1px solid var(--line)}
+.qa summary{cursor:pointer;list-style:none;padding:18px 0;font-weight:600;font-size:1.06rem;
+  display:flex;justify-content:space-between;gap:1rem;align-items:center}
+.qa summary::-webkit-details-marker{display:none}
+.qa summary::after{content:"+";font-family:var(--display);color:var(--ember);font-size:1.4rem;transition:transform .2s}
+.qa[open] summary::after{transform:rotate(45deg)}
+.qa p{padding:0 0 18px;color:var(--ink-soft)}
+
+/* ---------- footer ---------- */
+.foot{background:var(--carbon-2);color:var(--ash);padding:56px 0 30px}
+.foot__in{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:34px}
+.foot a{color:var(--ash);text-decoration:none}
+.foot a:hover{color:var(--bone)}
+.foot h4{font-family:var(--body);font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--bone);margin:0 0 1rem}
+.foot ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:.55rem;font-size:.94rem}
+.foot__by{margin-top:34px;padding-top:22px;border-top:1px solid var(--line-dark);
+  display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;font-size:.82rem}
+.foot__by a{color:var(--flame)}
+
+/* ---------- WhatsApp flotante ---------- */
+.wafab{position:fixed;right:18px;bottom:18px;z-index:55;background:#1faa55;color:#fff;
+  display:inline-flex;align-items:center;gap:.5rem;font-weight:600;text-decoration:none;
+  padding:.85rem 1.1rem;border-radius:999px;box-shadow:0 16px 40px -12px rgba(31,170,85,.7)}
+.wafab:hover{transform:translateY(-2px)}
+.wafab span{display:inline}
+
+/* ---------- modal cotizar ---------- */
+.modal{position:fixed;inset:0;z-index:80;display:none;place-items:center;padding:18px;
+  background:rgba(12,9,6,.7);backdrop-filter:blur(4px)}
+.modal.open{display:grid}
+.modal__card{background:var(--carbon);color:var(--bone);border-radius:var(--r);max-width:520px;width:100%;
+  max-height:92vh;overflow:auto;border:1px solid var(--line-dark);box-shadow:var(--shadow)}
+.modal__head{display:flex;justify-content:space-between;align-items:center;padding:20px 22px 0}
+.modal__head h3{font-size:1.5rem}
+.modal__x{background:none;border:none;color:var(--ash);font-size:1.6rem;cursor:pointer;line-height:1}
+.modal__body{padding:14px 22px 24px}
+
+/* ---------- panel descuentos (admin) ---------- */
+.admin{position:fixed;right:0;top:0;bottom:0;z-index:90;width:360px;max-width:92vw;
+  background:#120d09;color:var(--bone);border-left:1px solid var(--line-dark);
+  box-shadow:-20px 0 60px -20px rgba(0,0,0,.7);transform:translateX(100%);
+  transition:transform .25s ease;overflow:auto;padding:20px}
+.admin.open{transform:none}
+.admin h3{font-size:1.2rem;margin-bottom:.2rem}
+.admin .muted{color:var(--ash);font-size:.82rem;margin-bottom:16px}
+.admin__row{border:1px solid var(--line-dark);border-radius:12px;padding:12px;margin-bottom:12px}
+.admin__row label{font-weight:600;font-size:.9rem;display:flex;justify-content:space-between}
+.admin__row input[type=range]{width:100%;margin-top:8px;accent-color:var(--ember)}
+.admin input[type=text]{width:100%;background:rgba(255,255,255,.06);border:1px solid var(--line-dark);
+  color:var(--bone);border-radius:8px;padding:.6rem;font-family:var(--body);margin-top:6px}
+.admin__toggle{display:flex;align-items:center;gap:.5rem;font-size:.92rem;margin:10px 0}
+.admin .btn{font-size:.86rem;padding:.6rem 1rem;margin-top:6px;width:100%;justify-content:center}
+.admin__close{position:absolute;top:14px;right:16px;background:none;border:none;color:var(--ash);font-size:1.5rem;cursor:pointer}
+.admin pre{background:rgba(0,0,0,.4);border:1px solid var(--line-dark);border-radius:8px;padding:10px;
+  font-size:.72rem;white-space:pre-wrap;word-break:break-all;color:var(--ash);max-height:140px;overflow:auto}
+.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(20px);opacity:0;
+  background:var(--ink);color:var(--bone);padding:.7rem 1.2rem;border-radius:999px;font-size:.9rem;
+  z-index:100;transition:.2s;pointer-events:none}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ---------- responsive ---------- */
+@media (max-width:980px){
+  .hero__in{grid-template-columns:1fr;gap:30px}
+  .hero__media{order:-1}
+  .values,.steps{grid-template-columns:1fr 1fr}
+  .designs{grid-template-columns:1fr}
+  .proof,.lead__in,.foot__in{grid-template-columns:1fr}
+  .nav{display:none}
+  .head .btn{display:none}
+}
+@media (max-width:560px){
+  .sect{padding:62px 0}
+  .values,.steps,.stats{grid-template-columns:1fr}
+  .wafab span{display:none}
+  .hero__trust{gap:1.1rem}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;scroll-behavior:auto!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+
+<!-- ===================== BARRA PROMO ===================== -->
+<div class="promobar" id="promobar" hidden></div>
+
+<!-- ===================== HEADER ===================== -->
+<header class="head">
+  <div class="wrap head__in">
+    <a class="brand" href="#top" aria-label="quincho.com.py — inicio">
+      <span class="brand__mark" aria-hidden="true">
+        <!-- Logo: hereda las 3 barras de Hause, reinterpretadas como quincho (techo + postes + llama) -->
+        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4 16 L20 6 L36 16 Z" fill="currentColor"/>
+          <rect x="9"  y="18" width="5" height="16" fill="currentColor"/>
+          <rect x="26" y="18" width="5" height="16" fill="currentColor"/>
+          <rect x="18" y="14" width="4" height="20" fill="currentColor"/>
+          <path d="M20 8 C22 11 21.5 12.5 20 14 C18.5 12.5 18 11 20 8 Z" fill="#16110D"/>
+        </svg>
+      </span>
+      <span class="brand__txt">
+        <span class="brand__name">MIquincho</span>
+        <span class="brand__tag">Mejores espacios para el asado</span>
+      </span>
+    </a>
+    <nav class="nav" aria-label="Principal">
+      <a href="#disenos">Diseños</a>
+      <a href="#proceso">Cómo trabajamos</a>
+      <a href="#obras">Obras</a>
+      <a href="#faq">Preguntas</a>
+    </nav>
+    <a class="btn btn--ember" href="#cotizar" data-cta="header">Pedí tu cotización</a>
+  </div>
+</header>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero" id="top">
+  <div class="hero__glow" aria-hidden="true"></div>
+  <div class="wrap hero__in">
+    <div>
+      <span class="eyebrow">Quinchos llave en mano · en todo Paraguay</span>
+      <h1>El fin de semana<br>empieza en tu <em>quincho</em>.</h1>
+      <p class="hero__lead">Tres diseños listos para construir, con parrilla, mesada y techo. Diseño y obra de un solo equipo. Vos elegís el estilo; nosotros lo entregamos terminado.</p>
+      <div class="hero__cta">
+        <a class="btn btn--ember" href="#cotizar" data-cta="hero">Diseñá tu quincho</a>
+        <a class="btn btn--ghost" href="#disenos" data-cta="hero_ver">Ver los 3 diseños</a>
+      </div>
+      <div class="hero__trust">
+        <div><b>+15</b><span>años construyendo</span></div>
+        <div><b>3</b><span>estilos a elegir</span></div>
+        <div><b>1</b><span>equipo: diseño + obra</span></div>
+      </div>
+    </div>
+    <div class="hero__media">
+      <!-- Reemplazá por tu render principal: CONFIG.heroImage -->
+      <div class="slot" id="heroSlot">
+        <div>
+          <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 13 L12 4 L21 13"/><path d="M5 13v7h14v-7"/><path d="M9 20v-4h6v4"/></svg>
+          <small>Tu render del hero va acá</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== VALOR ===================== -->
+<section class="sect sect--brick">
+  <div class="wrap">
+    <span class="eyebrow">Por qué con nosotros</span>
+    <h2 style="font-size:clamp(1.8rem,3.6vw,2.6rem);margin-top:.5rem;max-width:18ch">Un quincho bien hecho dura una generación.</h2>
+    <div class="values">
+      <!-- <div class="value">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2v6M8 22h8M10 22c0-4 4-4 4-8a3 3 0 0 0-6 0"/></svg>
+        <h3>Parrilla de verdad</h3>
+        <p>Tiraje calculado, mesada apta y materiales que aguantan la brasa, no solo la foto.</p>
+      </div> -->
+      <div class="value">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 21V8l9-5 9 5v13"/><path d="M9 21v-6h6v6"/></svg>
+        <h3>Diseño + obra juntos</h3>
+        <p>Quien diseña, construye. Sin intermediarios, sin "eso no estaba en el plano".</p>
+      </div>
+      <div class="value">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/><path d="m9 12 2 2 4-4"/></svg>
+        <h3>Precio cerrado</h3>
+        <p>Presupuesto por escrito antes de empezar. Vos sabés cuánto, y cuándo, desde el día uno.</p>
+      </div>
+      <div class="value">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9"/><path d="M3 15h18l-2 5H5z"/></svg>
+        <h3>Llave en mano</h3>
+        <p>De los planos a la primera picada. Coordinamos todo y te lo entregamos terminado.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="grate" aria-hidden="true"></div>
+
+<!-- ===================== DISEÑOS ===================== -->
+<section class="sect" id="disenos">
+  <div class="wrap">
+    <span class="eyebrow">Elegí tu estilo</span>
+    <h2 style="font-size:clamp(2rem,4vw,3rem);margin-top:.5rem">Tres quinchos, tres maneras de juntarse.</h2>
+    <p style="color:var(--ink-soft);margin-top:.6rem;max-width:52ch">Cada diseño es un punto de partida. Lo adaptamos a tu terreno, tu presupuesto y la cantidad de gente que querés sentar.</p>
+    <div class="designs" id="designs"><!-- render dinámico desde CONFIG --></div>
+  </div>
+</section>
+
+<!-- ===================== PROCESO ===================== -->
+<section class="sect sect--dark" id="proceso">
+  <div class="wrap">
+    <span class="eyebrow">Cómo trabajamos</span>
+    <h2 style="font-size:clamp(2rem,4vw,3rem);margin-top:.5rem;color:var(--bone)">De la idea al primer asado, en cuatro pasos.</h2>
+    <div class="steps">
+      <div class="step"><h3>Charlamos</h3><p>Nos contás dónde, para cuántos y qué estilo te gusta. Visita y medición sin costo.</p></div>
+      <div class="step"><h3>Diseñamos</h3><p>Render y planos del quincho adaptado a tu espacio. Lo vemos juntos antes de seguir.</p></div>
+      <div class="step"><h3>Presupuestamos</h3><p>Precio cerrado por escrito, con plazos y forma de pago claros.</p></div>
+      <div class="step"><h3>Construimos</h3><p>Obra coordinada por nuestro equipo y entrega lista para encender el fuego.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PRUEBA SOCIAL ===================== -->
+<section class="sect sect--brick" id="obras">
+  <div class="wrap proof">
+    <div>
+      <span class="eyebrow">Trayectoria</span>
+      <h2 style="font-size:clamp(1.8rem,3.6vw,2.6rem);margin:.5rem 0 1.4rem;max-width:14ch">Obras entregadas, no solo renders.</h2>
+      <div class="stats">
+        <div class="stat"><b>+15</b><span>años en arquitectura y construcción</span></div>
+        <div class="stat"><b>100%</b><span>diseño y obra del mismo equipo</span></div>
+        <div class="stat"><b>Gs</b><span>presupuesto cerrado por escrito</span></div>
+        <div class="stat"><b>Asu</b><span>Asunción y Gran Asunción</span></div>
+      </div>
+    </div>
+    <div class="quotes">
+      <figure class="quote"><p>"Quedamos realmente sorprendidos con el resultado. Hoy disfrutamos del quincho que siempre soñamos."</p><cite>— Familia Gonzalez Kontoshky. Barrio Sajonia *</cite></figure>
+      <figure class="quote"><p>"La obra se entregó en tiempo, forma y presupuesto. Quincho y pascina impecables."</p><cite>— Cliente Dernando de la Mora *</cite></figure>
+      <p style="font-size:.74rem;color:var(--ink-soft)">* Testimonios de muestra — reemplazá por reseñas reales de tus clientes.</p>
+    </div>
+  </div>
+</section>
+
+<div class="grate" aria-hidden="true"></div>
+
+<!-- ===================== CONVERSIÓN / FORM ===================== -->
+<section class="sect lead" id="cotizar">
+  <div class="wrap lead__in">
+    <div>
+      <span class="eyebrow">Empecemos</span>
+      <h2>Pedí tu cotización sin compromiso.</h2>
+      <p class="lead__lead">Dejanos tus datos y te escribimos por WhatsApp con la propuesta para tu quincho. La visita de medición es sin costo.</p>
+      <ul class="lead__assure">
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m20 6-11 11-5-5"/></svg> Respuesta el mismo día hábil</li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m20 6-11 11-5-5"/></svg> Visita y medición sin costo</li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m20 6-11 11-5-5"/></svg> Presupuesto cerrado, sin sorpresas</li>
+      </ul>
+    </div>
+
+    <div class="form" id="leadForm">
+      <div class="form__fields">
+        <div class="field" data-field="name">
+          <label for="f_name">Nombre y apellido</label>
+          <input id="f_name" name="name" type="text" autocomplete="name" placeholder="Tu nombre" />
+          <span class="err">Contanos cómo te llamás.</span>
+        </div>
+        <div class="field" data-field="phone">
+          <label for="f_phone">WhatsApp</label>
+          <input id="f_phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="09xx xxx xxx" />
+          <span class="err">Necesitamos un WhatsApp válido para escribirte.</span>
+        </div>
+        <div class="field" data-field="design">
+          <label for="f_design">Diseño que te interesa</label>
+          <select id="f_design" name="design">
+            <option value="">Todavía no sé / quiero asesoramiento</option>
+          </select>
+        </div>
+        <div class="field" data-field="zona">
+          <label for="f_zona">Ciudad o barrio</label>
+          <input id="f_zona" name="zona" type="text" placeholder="Ej: Lambaré, Luque, Asunción…" />
+        </div>
+        <div class="field" data-field="msg">
+          <label for="f_msg">Algo que quieras agregar (opcional)</label>
+          <textarea id="f_msg" name="message" rows="2" placeholder="Cuántas personas, si ya tenés el terreno, etc."></textarea>
+        </div>
+        <button class="btn btn--ember btn--block" id="leadSubmit" type="button">Quiero mi cotización</button>
+        <p class="form__note">Al enviar, te contactaremos por WhatsApp. No compartimos tus datos.</p>
+      </div>
+      <div class="form__ok">
+        <h3>¡Listo! 🔥</h3>
+        <p>Recibimos tus datos. Seguimos por WhatsApp para coordinar la visita.</p>
+        <a class="btn btn--wa btn--block" id="okWa" href="#" target="_blank" rel="noopener">Continuar por WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FAQ ===================== -->
+<section class="sect" id="faq">
+  <div class="wrap">
+    <span class="eyebrow">Preguntas frecuentes</span>
+    <h2 style="font-size:clamp(2rem,4vw,3rem);margin-top:.5rem;text-align:center">Lo que todos preguntan antes de empezar.</h2>
+    <div class="faq">
+      <details class="qa"><summary>¿Cuánto cuesta un quincho?</summary><p>Depende del estilo, el tamaño y las terminaciones. Cada diseño tiene un precio "desde" como referencia; el valor final se cierra después de la visita de medición. Te lo entregamos por escrito antes de empezar.</p></details>
+      <details class="qa"><summary>¿Cuánto tarda la obra?</summary><p>Varía según el diseño y el clima, pero te damos un plazo cerrado en el presupuesto y lo respetamos. Lo coordinamos para no dejarte la obra abierta más de lo necesario.</p></details>
+      <details class="qa"><summary>¿Trabajan con financiación?</summary><p>Coordinamos la forma de pago en etapas según el avance de obra. Contanos tu caso y vemos cómo acomodarlo.</p></details>
+      <details class="qa"><summary>¿Puedo modificar el diseño?</summary><p>Sí. Cada uno de los tres estilos es un punto de partida. Lo adaptamos a tu terreno, a la cantidad de gente y a tu presupuesto.</p></details>
+      <details class="qa"><summary>¿Hacen quinchos con pileta?</summary><p>Sí: el diseño premium integra pileta y deck. También podemos sumar pileta a los otros estilos. Lo vemos en la propuesta.</p></details>
+      <details class="qa"><summary>¿En qué zonas construyen?</summary><p>Asunción y Gran Asunción. Si estás un poco más lejos, escribinos igual y lo evaluamos.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__in">
+      <div>
+        <a class="brand" href="#top" style="margin-bottom:14px">
+          <span class="brand__mark" aria-hidden="true">
+            <svg viewBox="0 0 40 40" fill="none"><path d="M4 16 L20 6 L36 16 Z" fill="currentColor"/><rect x="9" y="18" width="5" height="16" fill="currentColor"/><rect x="26" y="18" width="5" height="16" fill="currentColor"/><rect x="18" y="14" width="4" height="20" fill="currentColor"/></svg>
+          </span>
+          <span class="brand__txt"><span class="brand__name">quincho<span>.com.py</span></span></span>
+        </a>
+        <p style="font-size:.92rem;max-width:34ch">Mejores espacios para el asado. Quinchos diseñados y construidos en Paraguay.</p>
+      </div>
+      <div>
+        <h4>Navegar</h4>
+        <ul>
+          <li><a href="#disenos">Diseños</a></li>
+          <li><a href="#proceso">Cómo trabajamos</a></li>
+          <li><a href="#cotizar">Cotizar</a></li>
+          <li><a href="#faq">Preguntas</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contacto</h4>
+        <ul>
+          <li><a id="footWa" href="#">WhatsApp</a></li>
+          <li><a id="footMail" href="#">Email</a></li>
+          <li id="footAddr">Asunción · Paraguay</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot__by">
+      <span>© <span id="yr"></span> quincho.com.py — Todos los derechos reservados.</span>
+      <span>Diseñado y construido por <a href="https://www.hause.com.py" target="_blank" rel="noopener">Hause · arquitectura + construcción</a></span>
+    </div>
+  </div>
+</footer>
+
+<!-- WhatsApp flotante -->
+<a class="wafab" id="waFab" href="#" target="_blank" rel="noopener" data-cta="fab">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 0 1 8.413 3.488 11.82 11.82 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 0 0 1.523 5.26l-.999 3.648 3.965-1.042z"/></svg>
+  <span>Escribinos</span>
+</a>
+
+<!-- Modal cotizar (CTA de las cards) -->
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal__card">
+    <div class="modal__head">
+      <h3 id="modalTitle">Pedí tu cotización</h3>
+      <button class="modal__x" id="modalX" aria-label="Cerrar">×</button>
+    </div>
+    <div class="modal__body" id="modalBody"><!-- el form se mueve acá al abrir --></div>
+  </div>
+</div>
+
+<!-- Panel de descuentos (admin) -->
+<aside class="admin" id="admin" aria-label="Configurar descuentos">
+  <button class="admin__close" id="adminClose" aria-label="Cerrar panel">×</button>
+  <h3>Panel de descuentos</h3>
+  <p class="muted">Cambios en vivo. No se publican solos: copiá la configuración o la URL de campaña.</p>
+
+  <div class="admin__toggle">
+    <input type="checkbox" id="aPromoOn" />
+    <label for="aPromoOn" style="margin:0">Mostrar barra de promo</label>
+  </div>
+  <input type="text" id="aPromoText" placeholder="Texto de la promo" />
+
+  <div id="adminDesigns" style="margin-top:14px"></div>
+
+  <button class="btn btn--ember" id="aCopyUrl">Copiar URL de campaña</button>
+  <button class="btn btn--ghost" id="aCopyCfg" style="border-color:var(--ash);color:var(--ash)">Copiar configuración (código)</button>
+  <pre id="aOut" hidden></pre>
+</aside>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* =====================================================================
+   quincho.com.py — configuración + lógica
+   Editá SOLO el objeto CONFIG para tu operación diaria.
+   ===================================================================== */
+const CONFIG = {
+  brand: {
+    name: "quincho.com.py",
+    whatsapp: "595972827903",          // ← tu número en formato internacional, sin +
+    whatsappText: "Hola 👋 quiero información sobre los quinchos.",
+    email: "hola@quincho.com.py",       // ← cambiá por tu correo
+    address: "Asunción · Paraguay"
+  },
+
+  // Imagen del hero (dejá "" para ver el placeholder). Ej: "renders/hero.jpg"
+  heroImage: "imagenes/hero_3.webp",
+
+  // Medición de anuncios: pegá tus IDs y se disparan los eventos solos.
+  analytics: {
+    ga4Id: "",        // ej: "G-XXXXXXXXXX"  (Google Analytics 4)
+    metaPixelId: ""   // ej: "123456789012345" (Meta/Facebook Pixel)
+  },
+
+  // CRM: endpoint que recibe el lead por POST (JSON). Ver crm-google-apps-script.gs.
+  // Si lo dejás "", el formulario igual funciona y manda al WhatsApp.
+  crm: { endpoint: "" },
+
+  // Promo / barra superior (también editable desde el panel ?admin=1)
+  promo: {
+    active: false,
+    text: "🔥 Cupos de obra limitados este mes — agendá tu visita sin costo"
+  },
+
+  // Los 3 diseños. discount = % (0 = sin descuento). image = "" muestra placeholder.
+  designs: [
+    {
+      id: "esencial",
+      name: "Esencial (18 mt2)",
+      subtitle: "Infaltable en tu hogar",
+      blurb: "Cubierta con estructura metálica, piso de porcelanato, parrilla de maposteria revestida, mesada de granito.",
+      features: ["Estructura metálica", "Piso de porcelanato", "Parrilla de maposteria revestida", "Mesada de granito"],
+      priceUsd: 51500000,
+      discount: 20,
+      image: "imagenes/quincho_1.jpg"   // ej: "renders/tatakua.jpg"
+    },
+    {
+      id: "pro",
+      name: "Pro (30 mt2)",
+      subtitle: "Diseñado para vos",
+      blurb: "Cubierta con estructura metálica,cielo raso de PVC blanco, piso de porcelanato simil madera, parrilla de maposteria revestida, barra y mesada de granito.",
+      features: ["Estructura metálica", "Cielo raso de PVC blanco", "Piso de porcelanato simil madera", "Parrilla de maposteria revestida"],
+      priceUsd: 86800000,
+      discount: 15,
+      image: "imagenes/quincho_2_2.jpg"
+    },
+    {
+      id: "elite",
+      name: "Elite (42 mt2)",
+      subtitle: "La experiencia completa",
+      blurb: "Cubierta con estructura metálica, piso de porcelanato, parrilla de maposteria revestida, mesada de granito.",
+      features: ["Cubierta con estructura metálica", "Piso de porcelanato", "Parrilla de maposteria revestida", "Mesada de granito"],
+      priceUsd: 98500000,
+      discount: 10,
+      image: "imagenes/quincho_2.jpeg"
+    }
+  ]
+};
+
+/* ---------- utilidades ---------- */
+const $  = (s, r=document) => r.querySelector(s);
+const $$ = (s, r=document) => [...r.querySelectorAll(s)];
+const fmtUSD = n => "GS " + Number(n).toLocaleString("es-PY");
+const safeLS = {
+  get(k){ try{ return JSON.parse(localStorage.getItem(k)); }catch(e){ return null; } },
+  set(k,v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
+};
+function toast(msg){
+  const t = $("#toast"); t.textContent = msg; t.classList.add("show");
+  clearTimeout(t._t); t._t = setTimeout(()=>t.classList.remove("show"), 2200);
+}
+
+/* ---------- ATRIBUCIÓN: de qué anuncio vino ---------- */
+function captureAttribution(){
+  const p = new URLSearchParams(location.search);
+  const keys = ["utm_source","utm_medium","utm_campaign","utm_term","utm_content","gclid","fbclid","ttclid"];
+  const touch = { ts: new Date().toISOString(), landing: location.pathname, referrer: document.referrer || "directo" };
+  keys.forEach(k => { const v = p.get(k); if(v) touch[k] = v; });
+
+  // first-touch persiste (si el navegador lo permite); last-touch es esta visita
+  let first = safeLS.get("q_first_touch");
+  if(!first){ first = touch; safeLS.set("q_first_touch", first); }
+  safeLS.set("q_last_touch", touch);
+  return { first, last: touch };
+}
+const ATTR = captureAttribution();
+// Origen legible para el equipo de ventas (lo más útil): campaña > source > referrer
+const ATTR_LABEL = ATTR.last.utm_campaign || ATTR.last.utm_source || ATTR.first.utm_campaign || ATTR.first.utm_source || (ATTR.last.referrer === "directo" ? "Directo" : "Referido");
+
+/* ---------- ANALYTICS: dispara a GA4 + Meta Pixel si están cargados ---------- */
+function loadAnalytics(){
+  const { ga4Id, metaPixelId } = CONFIG.analytics;
+  if(ga4Id){
+    const s = document.createElement("script"); s.async = true;
+    s.src = "https://www.googletagmanager.com/gtag/js?id=" + ga4Id; document.head.appendChild(s);
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function(){ dataLayer.push(arguments); };
+    gtag("js", new Date()); gtag("config", ga4Id);
+  }
+  if(metaPixelId){
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
+    (window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', metaPixelId); fbq('track', 'PageView');
+  }
+}
+// Mapa de eventos del embudo → eventos estándar de cada plataforma
+const FB_MAP = { view_design:"ViewContent", open_quote:"InitiateCheckout", lead_submit:"Lead", whatsapp_click:"Contact" };
+function track(event, params={}){
+  const payload = { ...params, source: ATTR_LABEL, utm_campaign: ATTR.last.utm_campaign || "" };
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({ event, ...payload });
+  if(window.gtag) gtag("event", event, payload);
+  if(window.fbq && FB_MAP[event]) fbq("track", FB_MAP[event], params);
+}
+
+/* ---------- DESCUENTOS por URL (?off=15 todos · ?d=tatakua:10,brasa:20) ---------- */
+function applyUrlDiscounts(){
+  const p = new URLSearchParams(location.search);
+  const off = parseInt(p.get("off"), 10);
+  if(!isNaN(off)) CONFIG.designs.forEach(d => d.discount = clampPct(off));
+  const d = p.get("d");
+  if(d){ d.split(",").forEach(pair => {
+    const [id, pct] = pair.split(":");
+    const design = CONFIG.designs.find(x => x.id === id.trim());
+    if(design && pct != null) design.discount = clampPct(parseInt(pct, 10));
+  }); }
+  if(p.get("promo") === "1") CONFIG.promo.active = true;
+}
+const clampPct = n => Math.max(0, Math.min(90, isNaN(n) ? 0 : n));
+
+/* ---------- WhatsApp con atribución incluida ---------- */
+function waLink(extra=""){
+  const lines = [CONFIG.brand.whatsappText];
+  if(extra) lines.push(extra);
+  lines.push("\n(Origen: " + ATTR_LABEL + ")");
+  return "https://wa.me/" + CONFIG.brand.whatsapp + "?text=" + encodeURIComponent(lines.join("\n"));
+}
+
+/* ---------- RENDER de las cards de diseño ---------- */
+function priceParts(d){
+  const base = d.priceUsd, disc = clampPct(d.discount);
+  const now = Math.round(base * (1 - disc/100));
+  return { base, disc, now };
+}
+function renderDesigns(){
+  const wrap = $("#designs"); wrap.innerHTML = "";
+  const sel = $("#f_design");
+  // mantener opción 0
+  sel.length = 1;
+
+  CONFIG.designs.forEach(d => {
+    const { base, disc, now } = priceParts(d);
+    const card = document.createElement("article");
+    card.className = "card"; card.id = "card-" + d.id;
+    card.innerHTML = `
+      <div class="card__media">
+        <span class="card__tag">${d.subtitle}</span>
+        <span class="card__off" ${disc>0?"":"hidden"}>-${disc}%</span>
+        ${d.image
+          ? `<img src="${d.image}" alt="Quincho ${d.name}" loading="lazy" style="width:100%;height:100%;object-fit:cover">`
+          : `<div class="slot"><div>
+               <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M3 13 L12 4 L21 13"/><path d="M5 13v7h14v-7"/></svg>
+               <small>Render "${d.name}" acá</small></div></div>`}
+      </div>
+      <div class="card__body">
+        <h3 class="card__name">${d.name}</h3>
+        <p class="card__sub">${d.subtitle}</p>
+        <p class="card__blurb">${d.blurb}</p>
+        <ul class="card__feats">${d.features.map(f=>`<li>${f}</li>`).join("")}</ul>
+        <div class="card__price">
+          <span class="card__from">Desde</span>
+          <span class="card__now">${fmtUSD(now)}</span>
+          ${disc>0?`<span class="card__was">${fmtUSD(base)}</span>`:""}
+        </div>
+        <button class="btn btn--ember btn--block" data-pick="${d.id}">Quiero el ${d.name}</button>
+      </div>`;
+    wrap.appendChild(card);
+
+    // opción en el select del form
+    const o = document.createElement("option");
+    o.value = d.id; o.textContent = `${d.name} — ${d.subtitle}`;
+    sel.appendChild(o);
+  });
+
+  // CTA de cada card → abre modal con diseño preseleccionado
+  $$('[data-pick]').forEach(b => b.addEventListener("click", () => openQuote(b.dataset.pick)));
+}
+
+/* ---------- PROMO BAR ---------- */
+function renderPromo(){
+  const bar = $("#promobar");
+  if(CONFIG.promo.active && CONFIG.promo.text){ bar.hidden = false; bar.innerHTML = CONFIG.promo.text; }
+  else bar.hidden = true;
+}
+
+/* ---------- enlaces de marca (WA, mail, dirección) ---------- */
+function wireBrand(){
+  $("#waFab").href = waLink();
+  $("#footWa").href = waLink();
+  $("#footMail").href = "mailto:" + CONFIG.brand.email;
+  $("#footMail").textContent = CONFIG.brand.email;
+  $("#footAddr").textContent = CONFIG.brand.address;
+  $("#yr").textContent = new Date().getFullYear();
+  if(CONFIG.heroImage){
+    $("#heroSlot").outerHTML = `<img src="${CONFIG.heroImage}" alt="Quincho destacado" style="width:100%;height:100%;object-fit:cover">`;
+  }
+  // eventos de click WhatsApp
+  $$('[data-cta]').forEach(el => {
+    if(el.classList.contains("wafab")) el.addEventListener("click", ()=> track("whatsapp_click", { placement:"fab" }));
+  });
+  $("#footWa").addEventListener("click", ()=> track("whatsapp_click", { placement:"footer" }));
+}
+
+/* ---------- MODAL (mueve el form al popup) ---------- */
+const modal = $("#modal");
+let formHome, formNode;
+function openQuote(designId){
+  if(designId){ $("#f_design").value = designId; }
+  // mover el form al modal
+  formNode = $("#leadForm");
+  if(!formHome){ formHome = formNode.parentNode; }
+  $("#modalBody").appendChild(formNode);
+  modal.classList.add("open");
+  $("#modalTitle").textContent = designId
+    ? "Cotizá tu " + (CONFIG.designs.find(d=>d.id===designId)?.name || "quincho")
+    : "Pedí tu cotización";
+  track("open_quote", { design: designId || "sin_definir" });
+  setTimeout(()=> $("#f_name").focus(), 100);
+}
+function closeQuote(){
+  modal.classList.remove("open");
+  if(formHome && formNode){ formHome.appendChild(formNode); }  // devolver el form a la sección
+}
+$("#modalX").addEventListener("click", closeQuote);
+modal.addEventListener("click", e => { if(e.target === modal) closeQuote(); });
+document.addEventListener("keydown", e => { if(e.key === "Escape" && modal.classList.contains("open")) closeQuote(); });
+
+// CTAs que abren el form sin diseño preseleccionado y hacen scroll
+$$('a[href="#cotizar"]').forEach(a => a.addEventListener("click", ()=> track("hero_cta_click", { placement:a.dataset.cta||"link" })));
+
+/* ---------- envío del lead ---------- */
+async function submitLead(){
+  const name = $("#f_name").value.trim();
+  const phone = $("#f_phone").value.trim();
+  let ok = true;
+  setErr("name", !name); if(!name) ok = false;
+  const digits = phone.replace(/\D/g,"");
+  setErr("phone", digits.length < 6); if(digits.length < 6) ok = false;
+  if(!ok) return;
+
+  const designId = $("#f_design").value;
+  const design = CONFIG.designs.find(d=>d.id===designId);
+  const payload = {
+    name, phone,
+    design: design ? design.name : "Sin definir",
+    design_id: designId || "",
+    discount: design ? clampPct(design.discount) : 0,
+    zona: $("#f_zona").value.trim(),
+    message: $("#f_msg").value.trim(),
+    // atribución completa para tu CRM:
+    source: ATTR_LABEL,
+    first_touch: ATTR.first,
+    last_touch: ATTR.last,
+    page: location.href,
+    submitted_at: new Date().toISOString()
+  };
+
+  const btn = $("#leadSubmit"); btn.disabled = true; btn.textContent = "Enviando…";
+
+  if(CONFIG.crm.endpoint){
+    try{
+      await fetch(CONFIG.crm.endpoint, {
+        method:"POST",
+        headers:{ "Content-Type":"text/plain;charset=utf-8" }, // evita preflight con Apps Script
+        body: JSON.stringify(payload)
+      });
+    }catch(e){ console.warn("CRM no respondió, el lead sigue por WhatsApp.", e); }
+  } else {
+    console.log("[Lead capturado — configurá CONFIG.crm.endpoint para guardarlo]", payload);
+  }
+
+  track("lead_submit", { design: payload.design });
+
+  // estado de éxito + handoff a WhatsApp con todo el contexto
+  const waMsg = `Hola, soy ${name}. Quiero cotizar el quincho ${payload.design}` +
+                (payload.zona ? ` (zona: ${payload.zona})` : "") + ".";
+  $("#okWa").href = waLink(waMsg);
+  $("#leadForm").classList.add("is-done");
+  btn.disabled = false; btn.textContent = "Quiero mi cotización";
+}
+function setErr(field, on){ $(`[data-field="${field}"]`).classList.toggle("field--err", on); }
+$("#leadSubmit").addEventListener("click", submitLead);
+$("#okWa").addEventListener("click", ()=> track("whatsapp_click", { placement:"post_lead" }));
+
+/* ---------- observa qué diseño mira la gente (embudo) ---------- */
+function watchDesignViews(){
+  if(!("IntersectionObserver" in window)) return;
+  const seen = new Set();
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(en => {
+      if(en.isIntersecting && !seen.has(en.target.id)){
+        seen.add(en.target.id);
+        track("view_design", { design: en.target.id.replace("card-","") });
+      }
+    });
+  }, { threshold:.5 });
+  $$(".card").forEach(c => io.observe(c));
+}
+
+/* ---------- PANEL DE DESCUENTOS (admin) ---------- */
+function buildAdmin(){
+  const box = $("#adminDesigns"); box.innerHTML = "";
+  CONFIG.designs.forEach(d => {
+    const row = document.createElement("div"); row.className = "admin__row";
+    row.innerHTML = `
+      <label>${d.name} <span id="aval-${d.id}">${clampPct(d.discount)}%</span></label>
+      <input type="range" min="0" max="60" step="5" value="${clampPct(d.discount)}" data-disc="${d.id}">`;
+    box.appendChild(row);
+  });
+  $$('[data-disc]').forEach(r => r.addEventListener("input", e => {
+    const id = e.target.dataset.disc;
+    CONFIG.designs.find(x=>x.id===id).discount = clampPct(parseInt(e.target.value,10));
+    $("#aval-"+id).textContent = clampPct(e.target.value) + "%";
+    renderDesigns(); watchDesignViews();
+  }));
+  $("#aPromoOn").checked = CONFIG.promo.active;
+  $("#aPromoText").value = CONFIG.promo.text;
+  $("#aPromoOn").addEventListener("change", e => { CONFIG.promo.active = e.target.checked; renderPromo(); });
+  $("#aPromoText").addEventListener("input", e => { CONFIG.promo.text = e.target.value; renderPromo(); });
+
+  $("#aCopyUrl").addEventListener("click", copyCampaignUrl);
+  $("#aCopyCfg").addEventListener("click", copyConfigSnippet);
+  $("#adminClose").addEventListener("click", ()=> $("#admin").classList.remove("open"));
+}
+function copyCampaignUrl(){
+  const parts = CONFIG.designs.filter(d=>clampPct(d.discount)>0).map(d=>`${d.id}:${clampPct(d.discount)}`);
+  const u = new URL(location.origin + location.pathname);
+  if(parts.length) u.searchParams.set("d", parts.join(","));
+  if(CONFIG.promo.active) u.searchParams.set("promo","1");
+  // hueco para que pegues tu UTM de campaña:
+  u.searchParams.set("utm_source","REEMPLAZAR");
+  u.searchParams.set("utm_campaign","REEMPLAZAR");
+  copy(u.toString(), "URL de campaña copiada — completá utm_source y utm_campaign");
+}
+function copyConfigSnippet(){
+  const snippet = "promo: " + JSON.stringify(CONFIG.promo, null, 2) + ",\n\n" +
+    "descuentos: " + JSON.stringify(CONFIG.designs.map(d=>({id:d.id, discount:clampPct(d.discount)})), null, 2);
+  $("#aOut").hidden = false; $("#aOut").textContent = snippet;
+  copy(snippet, "Configuración copiada — pegala en CONFIG para dejarla fija");
+}
+function copy(text, msg){
+  navigator.clipboard?.writeText(text).then(()=>toast(msg)).catch(()=>{ $("#aOut").hidden=false; $("#aOut").textContent=text; toast("Copiá el texto de abajo"); });
+}
+function maybeOpenAdmin(){
+  if(new URLSearchParams(location.search).get("admin") === "1"){
+    $("#admin").classList.add("open");
+  }
+}
+
+/* ---------- init ---------- */
+applyUrlDiscounts();
+loadAnalytics();
+wireBrand();
+renderDesigns();
+renderPromo();
+watchDesignViews();
+buildAdmin();
+maybeOpenAdmin();
+track("page_view", {});
+</script>
+</body>
+</html>
