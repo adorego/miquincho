@@ -149,12 +149,8 @@ p{margin:0}
 .card{background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;
   display:flex;flex-direction:column;box-shadow:0 18px 40px -28px rgba(22,17,13,.4)}
 .card__media{aspect-ratio:4/3;position:relative}
-.card__tag{position:absolute;top:14px;left:14px;background:var(--carbon);color:var(--bone);
+.card__tag{position:absolute;top:14px;left:14px;z-index:3;background:var(--carbon);color:var(--bone);
   font-size:.72rem;font-weight:600;letter-spacing:.04em;padding:.32rem .7rem;border-radius:999px}
-.card__off{position:absolute;top:14px;right:14px;background:linear-gradient(180deg,var(--flame),var(--ember));
-  color:#fff;font-weight:700;font-size:.82rem;padding:.36rem .7rem;border-radius:999px;
-  box-shadow:0 0 0 4px rgba(226,73,31,.18), 0 8px 22px -6px rgba(226,73,31,.6)}
-.card__off[hidden]{display:none}
 .card__body{padding:22px 22px 24px;display:flex;flex-direction:column;flex:1}
 .card__name{font-size:1.5rem}
 .card__sub{color:var(--ember);font-weight:600;font-size:.82rem;letter-spacing:.04em;text-transform:uppercase;margin:.2rem 0 .6rem}
@@ -162,10 +158,24 @@ p{margin:0}
 .card__feats{list-style:none;padding:0;margin:0 0 1.2rem;display:flex;flex-direction:column;gap:.5rem}
 .card__feats li{font-size:.92rem;display:flex;gap:.55rem;align-items:flex-start;color:var(--ink)}
 .card__feats li::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--ember);margin-top:.5rem;flex:0 0 auto}
-.card__price{margin-top:auto;display:flex;align-items:baseline;gap:.6rem;margin-bottom:1rem}
-.card__from{font-size:.78rem;color:var(--ink-soft)}
-.card__now{font-family:var(--display);font-size:1.9rem;font-weight:600}
-.card__was{font-size:1rem;color:var(--ink-soft);text-decoration:line-through}
+.card__cta{margin-top:auto}
+
+/* carrusel de fotos dentro de cada card */
+.carousel{position:relative;width:100%;height:100%;overflow:hidden}
+.carousel:focus-visible{outline:3px solid var(--flame);outline-offset:-3px}
+.carousel__track{position:relative;width:100%;height:100%}
+.carousel__slide{position:absolute;inset:0;opacity:0;transition:opacity .5s ease}
+.carousel__slide.is-active{opacity:1}
+.carousel__slide img{width:100%;height:100%;object-fit:cover}
+.carousel__arrow{position:absolute;top:50%;transform:translateY(-50%);width:32px;height:32px;border-radius:50%;
+  background:rgba(22,17,13,.55);color:#fff;border:none;cursor:pointer;display:grid;place-items:center;
+  font-size:1.2rem;line-height:1;z-index:2;opacity:0;transition:opacity .15s ease}
+.carousel:hover .carousel__arrow,.carousel:focus-within .carousel__arrow{opacity:1}
+.carousel__arrow--prev{left:8px}
+.carousel__arrow--next{right:8px}
+.carousel__dots{position:absolute;bottom:10px;left:0;right:0;display:flex;justify-content:center;gap:6px;z-index:2}
+.carousel__dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.5);border:none;padding:0;cursor:pointer}
+.carousel__dot.is-active{background:#fff}
 
 /* ---------- proceso ---------- */
 .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:26px;margin-top:42px;counter-reset:s}
@@ -207,6 +217,7 @@ p{margin:0}
 .field--err input,.field--err select{border-color:var(--ember)}
 .field .err{display:none;color:#ffb4a1;font-size:.78rem;margin-top:.3rem}
 .field--err .err{display:block}
+.form__actions{display:flex;flex-direction:column;gap:.7rem;margin-top:4px}
 .form__note{font-size:.78rem;color:var(--ash);margin-top:.5rem;text-align:center}
 .form__ok{display:none;text-align:center;padding:18px 6px}
 .form__ok h3{font-size:1.5rem;margin-bottom:.4rem}
@@ -254,28 +265,6 @@ p{margin:0}
 .modal__x{background:none;border:none;color:var(--ash);font-size:1.6rem;cursor:pointer;line-height:1}
 .modal__body{padding:14px 22px 24px}
 
-/* ---------- panel descuentos (admin) ---------- */
-.admin{position:fixed;right:0;top:0;bottom:0;z-index:90;width:360px;max-width:92vw;
-  background:#120d09;color:var(--bone);border-left:1px solid var(--line-dark);
-  box-shadow:-20px 0 60px -20px rgba(0,0,0,.7);transform:translateX(100%);
-  transition:transform .25s ease;overflow:auto;padding:20px}
-.admin.open{transform:none}
-.admin h3{font-size:1.2rem;margin-bottom:.2rem}
-.admin .muted{color:var(--ash);font-size:.82rem;margin-bottom:16px}
-.admin__row{border:1px solid var(--line-dark);border-radius:12px;padding:12px;margin-bottom:12px}
-.admin__row label{font-weight:600;font-size:.9rem;display:flex;justify-content:space-between}
-.admin__row input[type=range]{width:100%;margin-top:8px;accent-color:var(--ember)}
-.admin input[type=text]{width:100%;background:rgba(255,255,255,.06);border:1px solid var(--line-dark);
-  color:var(--bone);border-radius:8px;padding:.6rem;font-family:var(--body);margin-top:6px}
-.admin__toggle{display:flex;align-items:center;gap:.5rem;font-size:.92rem;margin:10px 0}
-.admin .btn{font-size:.86rem;padding:.6rem 1rem;margin-top:6px;width:100%;justify-content:center}
-.admin__close{position:absolute;top:14px;right:16px;background:none;border:none;color:var(--ash);font-size:1.5rem;cursor:pointer}
-.admin pre{background:rgba(0,0,0,.4);border:1px solid var(--line-dark);border-radius:8px;padding:10px;
-  font-size:.72rem;white-space:pre-wrap;word-break:break-all;color:var(--ash);max-height:140px;overflow:auto}
-.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(20px);opacity:0;
-  background:var(--ink);color:var(--bone);padding:.7rem 1.2rem;border-radius:999px;font-size:.9rem;
-  z-index:100;transition:.2s;pointer-events:none}
-.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
 /* ---------- responsive ---------- */
 @media (max-width:980px){
@@ -518,36 +507,34 @@ p{margin:0}
     <div class="form" id="leadForm">
       <div class="form__fields">
         <div class="field" data-field="name">
-          <label for="f_name">Nombre y apellido</label>
+          <label for="f_name">Nombre</label>
           <input id="f_name" name="name" type="text" autocomplete="name" placeholder="Tu nombre" />
           <span class="err">Contanos cómo te llamás.</span>
         </div>
         <div class="field" data-field="phone">
-          <label for="f_phone">WhatsApp</label>
+          <label for="f_phone">Celular</label>
           <input id="f_phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="09xx xxx xxx" />
-          <span class="err">Necesitamos un WhatsApp válido para escribirte.</span>
+          <span class="err">Necesitamos un celular válido para escribirte.</span>
         </div>
         <div class="field" data-field="design">
-          <label for="f_design">Diseño que te interesa</label>
+          <label for="f_design">Quincho seleccionado</label>
           <select id="f_design" name="design">
             <option value="">Todavía no sé / quiero asesoramiento</option>
           </select>
         </div>
-        <div class="field" data-field="zona">
-          <label for="f_zona">Ciudad o barrio</label>
-          <input id="f_zona" name="zona" type="text" placeholder="Ej: Lambaré, Luque, Asunción…" />
-        </div>
         <div class="field" data-field="msg">
-          <label for="f_msg">Algo que quieras agregar (opcional)</label>
-          <textarea id="f_msg" name="message" rows="2" placeholder="Cuántas personas, si ya tenés el terreno, etc."></textarea>
+          <label for="f_msg">Consulta</label>
+          <textarea id="f_msg" name="message" rows="3" placeholder="Contanos para cuántas personas, si ya tenés el terreno, etc. (opcional)"></textarea>
         </div>
-        <button class="btn btn--ember btn--block" id="leadSubmit" type="button">Quiero mi cotización</button>
-        <p class="form__note">Al enviar, te contactaremos por WhatsApp. No compartimos tus datos.</p>
+        <div class="form__actions">
+          <button class="btn btn--wa btn--block" id="leadWhatsapp" type="button">Enviar por WhatsApp</button>
+          <button class="btn btn--ember btn--block" id="leadEmail" type="button">Enviar por correo</button>
+        </div>
+        <p class="form__note">No compartimos tus datos. Elegí el canal que prefieras.</p>
       </div>
       <div class="form__ok">
         <h3>¡Listo! 🔥</h3>
-        <p>Recibimos tus datos. Seguimos por WhatsApp para coordinar la visita.</p>
-        <a class="btn btn--wa btn--block" id="okWa" href="#" target="_blank" rel="noopener">Continuar por WhatsApp</a>
+        <p id="leadOkMsg">Recibimos tu consulta. Te contactamos a la brevedad.</p>
       </div>
     </div>
   </div>
@@ -559,7 +546,7 @@ p{margin:0}
     <span class="eyebrow">Preguntas frecuentes</span>
     <h2 style="font-size:clamp(2rem,4vw,3rem);margin-top:.5rem;text-align:center">Lo que todos preguntan antes de empezar.</h2>
     <div class="faq">
-      <details class="qa"><summary>¿Cuánto cuesta un quincho?</summary><p>Depende del estilo, el tamaño y las terminaciones. Cada diseño tiene un precio "desde" como referencia; el valor final se cierra después de la visita de medición. Te lo entregamos por escrito antes de empezar.</p></details>
+      <details class="qa"><summary>¿Cuánto cuesta un quincho?</summary><p>Depende del estilo, el tamaño y las terminaciones. El valor se define después de la visita de medición y te lo entregamos por escrito antes de empezar.</p></details>
       <details class="qa"><summary>¿Cuánto tarda la obra?</summary><p>Varía según el diseño y el clima, pero te damos un plazo cerrado en el presupuesto y lo respetamos. Lo coordinamos para no dejarte la obra abierta más de lo necesario.</p></details>
       <details class="qa"><summary>¿Trabajan con financiación?</summary><p>Coordinamos la forma de pago en etapas según el avance de obra. Contanos tu caso y vemos cómo acomodarlo.</p></details>
       <details class="qa"><summary>¿Puedo modificar el diseño?</summary><p>Sí. Cada uno de los tres estilos es un punto de partida. Lo adaptamos a tu terreno, al tamaño y a tu presupuesto.</p></details>
@@ -624,27 +611,6 @@ p{margin:0}
   </div>
 </div>
 
-<!-- Panel de descuentos (admin) -->
-<aside class="admin" id="admin" aria-label="Configurar descuentos">
-  <button class="admin__close" id="adminClose" aria-label="Cerrar panel">×</button>
-  <h3>Panel de descuentos</h3>
-  <p class="muted">Cambios en vivo. No se publican solos: copiá la configuración o la URL de campaña.</p>
-
-  <div class="admin__toggle">
-    <input type="checkbox" id="aPromoOn" />
-    <label for="aPromoOn" style="margin:0">Mostrar barra de promo</label>
-  </div>
-  <input type="text" id="aPromoText" placeholder="Texto de la promo" />
-
-  <div id="adminDesigns" style="margin-top:14px"></div>
-
-  <button class="btn btn--ember" id="aCopyUrl">Copiar URL de campaña</button>
-  <button class="btn btn--ghost" id="aCopyCfg" style="border-color:var(--ash);color:var(--ash)">Copiar configuración (código)</button>
-  <pre id="aOut" hidden></pre>
-</aside>
-
-<div class="toast" id="toast"></div>
-
 <!-- Lightbox / visor de fotos de la galería -->
 <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Visor de fotos">
   <button class="lightbox__x" id="lbClose" aria-label="Cerrar">×</button>
@@ -681,7 +647,7 @@ const CONFIG = {
   // Si lo dejás "", el formulario igual funciona y manda al WhatsApp.
   crm: { endpoint: "" },
 
-  // Promo / barra superior (también editable desde el panel ?admin=1)
+  // Promo / barra superior de texto
   promo: {
     active: false,
     text: "🔥 Cupos de obra limitados este mes — agendá tu visita sin costo"
@@ -710,7 +676,17 @@ const CONFIG = {
     { src: "imagenes/piscina_13.jpg", alt: "Piscina en construcción, revestimiento turquesa", cat: "piscina" },
   ],
 
-  // Los 3 diseños. discount = % (0 = sin descuento). image = "" muestra placeholder.
+  // Los 3 diseños.
+  // FOTOS DE CADA QUINCHO (carrusel en la card):
+  //   - images: array de rutas a fotos. Vacío ([]) muestra el placeholder genérico.
+  //   - Recomendado 5 a 6 fotos por quincho, en este orden: vista general, parrilla,
+  //     mesada/barra, techo/cubierta, deck/piso, iluminación de noche.
+  //   - Subí los archivos a la carpeta imagenes/ con nombres tipo:
+  //       imagenes/esencial-01.jpg ... imagenes/esencial-06.jpg
+  //       imagenes/pro-01.jpg ... imagenes/pro-06.jpg
+  //       imagenes/elite-01.jpg ... imagenes/elite-06.jpg
+  //   - Y completá el array, ej:
+  //       images: ["imagenes/esencial-01.jpg", "imagenes/esencial-02.jpg", "imagenes/esencial-03.jpg"]
   designs: [
     {
       id: "esencial",
@@ -718,9 +694,7 @@ const CONFIG = {
       subtitle: "Infaltable en tu hogar",
       blurb: "Cubierta con estructura metálica, piso de porcelanato, parrilla de mamposteria revestida, mesada de granito.",
       features: ["Estructura metálica", "Piso de porcelanato", "Parrilla de maposteria revestida", "Mesada de granito"],
-      priceUsd: 51770000,
-      discount: 0,
-      image: "imagenes/quincho_1.jpg"   // ej: "renders/tatakua.jpg"
+      images: ["imagenes/quincho_1.jpg", "imagenes/quincho_1_2.jpg"]
     },
     {
       id: "pro",
@@ -728,9 +702,7 @@ const CONFIG = {
       subtitle: "Diseñado para vos",
       blurb: "Cubierta con estructura metálica,cielo raso de PVC blanco, piso de porcelanato simil madera, parrilla de mamposteria revestida, barra y mesada de granito.",
       features: ["Estructura metálica", "Cielo raso de PVC blanco", "Piso de porcelanato simil madera", "Parrilla de mamposteria revestida"],
-      priceUsd: 97400000,
-      discount: 0,
-      image: "imagenes/quincho_2_2.jpg"
+      images: ["imagenes/quincho_2.jpeg", "imagenes/quincho_2_1.png","imagenes/quincho_2_2.png"]   // ej: ["imagenes/pro-01.jpg", "imagenes/pro-02.jpg", ...]
     },
     {
       id: "elite",
@@ -738,9 +710,7 @@ const CONFIG = {
       subtitle: "La experiencia completa",
       blurb: "Cubierta con estructura metálica, piso de porcelanato, parrilla de maposteria revestida, mesada de granito.",
       features: ["Cubierta con estructura metálica", "Piso de porcelanato", "Parrilla de mamposteria revestida", "Mesada de granito"],
-      priceUsd: 116000000,
-      discount: 0,
-      image: "imagenes/quincho_2.jpeg"
+      images: ["imagenes/quincho_3.jpg", "imagenes/quincho_3_1.png","imagenes/quincho_3_2.png"]   // ej: ["imagenes/elite-01.jpg", "imagenes/elite-02.jpg", ...]
     }
   ]
 };
@@ -748,15 +718,10 @@ const CONFIG = {
 /* ---------- utilidades ---------- */
 const $  = (s, r=document) => r.querySelector(s);
 const $$ = (s, r=document) => [...r.querySelectorAll(s)];
-const fmtUSD = n => "GS " + Number(n).toLocaleString("es-PY");
 const safeLS = {
   get(k){ try{ return JSON.parse(localStorage.getItem(k)); }catch(e){ return null; } },
   set(k,v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
 };
-function toast(msg){
-  const t = $("#toast"); t.textContent = msg; t.classList.add("show");
-  clearTimeout(t._t); t._t = setTimeout(()=>t.classList.remove("show"), 2200);
-}
 
 /* ---------- ATRIBUCIÓN: de qué anuncio vino ---------- */
 function captureAttribution(){
@@ -804,21 +769,6 @@ function track(event, params={}){
   if(window.fbq && FB_MAP[event]) fbq("track", FB_MAP[event], params);
 }
 
-/* ---------- DESCUENTOS por URL (?off=15 todos · ?d=tatakua:10,brasa:20) ---------- */
-function applyUrlDiscounts(){
-  const p = new URLSearchParams(location.search);
-  const off = parseInt(p.get("off"), 10);
-  if(!isNaN(off)) CONFIG.designs.forEach(d => d.discount = clampPct(off));
-  const d = p.get("d");
-  if(d){ d.split(",").forEach(pair => {
-    const [id, pct] = pair.split(":");
-    const design = CONFIG.designs.find(x => x.id === id.trim());
-    if(design && pct != null) design.discount = clampPct(parseInt(pct, 10));
-  }); }
-  if(p.get("promo") === "1") CONFIG.promo.active = true;
-}
-const clampPct = n => Math.max(0, Math.min(90, isNaN(n) ? 0 : n));
-
 /* ---------- WhatsApp con atribución incluida ---------- */
 function waLink(extra=""){
   const lines = [CONFIG.brand.whatsappText];
@@ -828,11 +778,61 @@ function waLink(extra=""){
 }
 
 /* ---------- RENDER de las cards de diseño ---------- */
-function priceParts(d){
-  const base = d.priceUsd, disc = clampPct(d.discount);
-  const now = Math.round(base * (1 - disc/100));
-  return { base, disc, now };
+function renderCardMedia(d){
+  const imgs = (d.images || []).filter(Boolean);
+  if(!imgs.length){
+    return `<div class="slot"><div>
+               <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M3 13 L12 4 L21 13"/><path d="M5 13v7h14v-7"/></svg>
+               <small>Fotos de "${d.name}" acá</small></div></div>`;
+  }
+  if(imgs.length === 1){
+    return `<img src="${imgs[0]}" alt="Quincho ${d.name}" loading="lazy" style="width:100%;height:100%;object-fit:cover">`;
+  }
+  const slides = imgs.map((src,i)=>`<div class="carousel__slide${i===0?" is-active":""}"><img src="${src}" alt="Quincho ${d.name} — foto ${i+1}" loading="lazy"></div>`).join("");
+  const dots = imgs.map((_,i)=>`<button type="button" class="carousel__dot${i===0?" is-active":""}" data-dot="${i}" aria-label="Ir a foto ${i+1} de ${d.name}" aria-current="${i===0?"true":"false"}"></button>`).join("");
+  return `
+    <div class="carousel" id="car-${d.id}" data-count="${imgs.length}" tabindex="0" role="region" aria-label="Fotos de ${d.name}">
+      <div class="carousel__track">${slides}</div>
+      <button type="button" class="carousel__arrow carousel__arrow--prev" data-dir="-1" aria-label="Foto anterior">‹</button>
+      <button type="button" class="carousel__arrow carousel__arrow--next" data-dir="1" aria-label="Foto siguiente">›</button>
+      <div class="carousel__dots">${dots}</div>
+    </div>`;
 }
+
+function initCarousels(){
+  const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  $$(".carousel").forEach(car => {
+    const count = parseInt(car.dataset.count, 10);
+    const slides = $$(".carousel__slide", car);
+    const dots = $$(".carousel__dot", car);
+    let idx = 0, timer = null;
+
+    function show(i){
+      idx = (i + count) % count;
+      slides.forEach((s,j) => s.classList.toggle("is-active", j === idx));
+      dots.forEach((dd,j) => { dd.classList.toggle("is-active", j === idx); dd.setAttribute("aria-current", j === idx ? "true" : "false"); });
+    }
+    function next(){ show(idx + 1); }
+    function prev(){ show(idx - 1); }
+    function stop(){ if(timer){ clearInterval(timer); timer = null; } }
+    function start(){ stop(); if(!reduceMotion) timer = setInterval(next, 4000); }
+
+    car.addEventListener("mouseenter", stop);
+    car.addEventListener("mouseleave", start);
+    car.addEventListener("focusin", stop);
+    car.addEventListener("focusout", start);
+    car.querySelector(".carousel__arrow--prev").addEventListener("click", e => { e.stopPropagation(); prev(); start(); });
+    car.querySelector(".carousel__arrow--next").addEventListener("click", e => { e.stopPropagation(); next(); start(); });
+    dots.forEach(dot => dot.addEventListener("click", e => { e.stopPropagation(); show(parseInt(dot.dataset.dot, 10)); start(); }));
+    car.addEventListener("keydown", e => {
+      if(e.key === "ArrowRight"){ next(); start(); }
+      if(e.key === "ArrowLeft"){ prev(); start(); }
+    });
+
+    start();
+  });
+}
+
 function renderDesigns(){
   const wrap = $("#designs"); wrap.innerHTML = "";
   const sel = $("#f_design");
@@ -840,30 +840,19 @@ function renderDesigns(){
   sel.length = 1;
 
   CONFIG.designs.forEach(d => {
-    const { base, disc, now } = priceParts(d);
     const card = document.createElement("article");
     card.className = "card"; card.id = "card-" + d.id;
     card.innerHTML = `
       <div class="card__media">
         <span class="card__tag">${d.subtitle}</span>
-        <span class="card__off" ${disc>0?"":"hidden"}>-${disc}%</span>
-        ${d.image
-          ? `<img src="${d.image}" alt="Quincho ${d.name}" loading="lazy" style="width:100%;height:100%;object-fit:cover">`
-          : `<div class="slot"><div>
-               <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M3 13 L12 4 L21 13"/><path d="M5 13v7h14v-7"/></svg>
-               <small>Render "${d.name}" acá</small></div></div>`}
+        ${renderCardMedia(d)}
       </div>
       <div class="card__body">
         <h3 class="card__name">${d.name}</h3>
         <p class="card__sub">${d.subtitle}</p>
         <p class="card__blurb">${d.blurb}</p>
         <ul class="card__feats">${d.features.map(f=>`<li>${f}</li>`).join("")}</ul>
-        <div class="card__price">
-          <span class="card__from">Desde</span>
-          <span class="card__now">${fmtUSD(now)}</span>
-          ${disc>0?`<span class="card__was">${fmtUSD(base)}</span>`:""}
-        </div>
-        <button class="btn btn--ember btn--block" data-pick="${d.id}">Quiero el ${d.name}</button>
+        <button class="btn btn--ember btn--block card__cta" data-pick="${d.id}">Pedir cotización</button>
       </div>`;
     wrap.appendChild(card);
 
@@ -875,6 +864,7 @@ function renderDesigns(){
 
   // CTA de cada card → abre modal con diseño preseleccionado
   $$('[data-pick]').forEach(b => b.addEventListener("click", () => openQuote(b.dataset.pick)));
+  initCarousels();
 }
 
 /* ---------- PROMO BAR ---------- */
@@ -929,24 +919,25 @@ document.addEventListener("keydown", e => { if(e.key === "Escape" && modal.class
 // CTAs que abren el form sin diseño preseleccionado y hacen scroll
 $$('a[href="#cotizar"]').forEach(a => a.addEventListener("click", ()=> track("hero_cta_click", { placement:a.dataset.cta||"link" })));
 
-/* ---------- envío del lead ---------- */
-async function submitLead(){
+/* ---------- envío del lead (doble canal: WhatsApp o correo) ---------- */
+function setErr(field, on){ $(`[data-field="${field}"]`).classList.toggle("field--err", on); }
+function validateLead(){
   const name = $("#f_name").value.trim();
   const phone = $("#f_phone").value.trim();
   let ok = true;
   setErr("name", !name); if(!name) ok = false;
   const digits = phone.replace(/\D/g,"");
   setErr("phone", digits.length < 6); if(digits.length < 6) ok = false;
-  if(!ok) return;
-
+  return ok;
+}
+function buildLeadPayload(){
   const designId = $("#f_design").value;
   const design = CONFIG.designs.find(d=>d.id===designId);
-  const payload = {
-    name, phone,
+  return {
+    name: $("#f_name").value.trim(),
+    phone: $("#f_phone").value.trim(),
     design: design ? design.name : "Sin definir",
     design_id: designId || "",
-    discount: design ? clampPct(design.discount) : 0,
-    zona: $("#f_zona").value.trim(),
     message: $("#f_msg").value.trim(),
     // atribución completa para tu CRM:
     source: ATTR_LABEL,
@@ -955,8 +946,28 @@ async function submitLead(){
     page: location.href,
     submitted_at: new Date().toISOString()
   };
+}
+function showSent(channel){
+  $("#leadOkMsg").textContent = channel === "whatsapp"
+    ? "Abrimos WhatsApp con tu mensaje. Si no se abrió, escribinos directamente."
+    : "Recibimos tu consulta. Te contactamos a la brevedad.";
+  $("#leadForm").classList.add("is-done");
+}
 
-  const btn = $("#leadSubmit"); btn.disabled = true; btn.textContent = "Enviando…";
+function sendWhatsapp(){
+  if(!validateLead()) return;
+  const payload = buildLeadPayload();
+  const waMsg = `Hola, soy ${payload.name}. Celular: ${payload.phone}. Quincho: ${payload.design}.` +
+                (payload.message ? ` Consulta: ${payload.message}` : "");
+  track("whatsapp_click", { placement:"lead_form", design: payload.design });
+  window.open(waLink(waMsg), "_blank", "noopener");
+  showSent("whatsapp");
+}
+
+async function sendEmail(){
+  if(!validateLead()) return;
+  const payload = buildLeadPayload();
+  const btn = $("#leadEmail"); btn.disabled = true; btn.textContent = "Enviando…";
 
   if(CONFIG.crm.endpoint){
     try{
@@ -965,23 +976,19 @@ async function submitLead(){
         headers:{ "Content-Type":"text/plain;charset=utf-8" }, // evita preflight con Apps Script
         body: JSON.stringify(payload)
       });
-    }catch(e){ console.warn("CRM no respondió, el lead sigue por WhatsApp.", e); }
+    }catch(e){ console.warn("CRM no respondió, probá por WhatsApp.", e); }
   } else {
-    console.log("[Lead capturado — configurá CONFIG.crm.endpoint para guardarlo]", payload);
+    const subject = "Cotización quincho — " + payload.design;
+    const body = `Nombre: ${payload.name}\nCelular: ${payload.phone}\nQuincho: ${payload.design}\nConsulta: ${payload.message}\nOrigen: ${payload.source}`;
+    location.href = `mailto:${CONFIG.brand.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   }
 
   track("lead_submit", { design: payload.design });
-
-  // estado de éxito + handoff a WhatsApp con todo el contexto
-  const waMsg = `Hola, soy ${name}. Quiero cotizar el quincho ${payload.design}` +
-                (payload.zona ? ` (zona: ${payload.zona})` : "") + ".";
-  $("#okWa").href = waLink(waMsg);
-  $("#leadForm").classList.add("is-done");
-  btn.disabled = false; btn.textContent = "Quiero mi cotización";
+  btn.disabled = false; btn.textContent = "Enviar por correo";
+  showSent("email");
 }
-function setErr(field, on){ $(`[data-field="${field}"]`).classList.toggle("field--err", on); }
-$("#leadSubmit").addEventListener("click", submitLead);
-$("#okWa").addEventListener("click", ()=> track("whatsapp_click", { placement:"post_lead" }));
+$("#leadWhatsapp").addEventListener("click", sendWhatsapp);
+$("#leadEmail").addEventListener("click", sendEmail);
 
 /* ---------- observa qué diseño mira la gente (embudo) ---------- */
 function watchDesignViews(){
@@ -996,56 +1003,6 @@ function watchDesignViews(){
     });
   }, { threshold:.5 });
   $$(".card").forEach(c => io.observe(c));
-}
-
-/* ---------- PANEL DE DESCUENTOS (admin) ---------- */
-function buildAdmin(){
-  const box = $("#adminDesigns"); box.innerHTML = "";
-  CONFIG.designs.forEach(d => {
-    const row = document.createElement("div"); row.className = "admin__row";
-    row.innerHTML = `
-      <label>${d.name} <span id="aval-${d.id}">${clampPct(d.discount)}%</span></label>
-      <input type="range" min="0" max="60" step="5" value="${clampPct(d.discount)}" data-disc="${d.id}">`;
-    box.appendChild(row);
-  });
-  $$('[data-disc]').forEach(r => r.addEventListener("input", e => {
-    const id = e.target.dataset.disc;
-    CONFIG.designs.find(x=>x.id===id).discount = clampPct(parseInt(e.target.value,10));
-    $("#aval-"+id).textContent = clampPct(e.target.value) + "%";
-    renderDesigns(); watchDesignViews();
-  }));
-  $("#aPromoOn").checked = CONFIG.promo.active;
-  $("#aPromoText").value = CONFIG.promo.text;
-  $("#aPromoOn").addEventListener("change", e => { CONFIG.promo.active = e.target.checked; renderPromo(); });
-  $("#aPromoText").addEventListener("input", e => { CONFIG.promo.text = e.target.value; renderPromo(); });
-
-  $("#aCopyUrl").addEventListener("click", copyCampaignUrl);
-  $("#aCopyCfg").addEventListener("click", copyConfigSnippet);
-  $("#adminClose").addEventListener("click", ()=> $("#admin").classList.remove("open"));
-}
-function copyCampaignUrl(){
-  const parts = CONFIG.designs.filter(d=>clampPct(d.discount)>0).map(d=>`${d.id}:${clampPct(d.discount)}`);
-  const u = new URL(location.origin + location.pathname);
-  if(parts.length) u.searchParams.set("d", parts.join(","));
-  if(CONFIG.promo.active) u.searchParams.set("promo","1");
-  // hueco para que pegues tu UTM de campaña:
-  u.searchParams.set("utm_source","REEMPLAZAR");
-  u.searchParams.set("utm_campaign","REEMPLAZAR");
-  copy(u.toString(), "URL de campaña copiada — completá utm_source y utm_campaign");
-}
-function copyConfigSnippet(){
-  const snippet = "promo: " + JSON.stringify(CONFIG.promo, null, 2) + ",\n\n" +
-    "descuentos: " + JSON.stringify(CONFIG.designs.map(d=>({id:d.id, discount:clampPct(d.discount)})), null, 2);
-  $("#aOut").hidden = false; $("#aOut").textContent = snippet;
-  copy(snippet, "Configuración copiada — pegala en CONFIG para dejarla fija");
-}
-function copy(text, msg){
-  navigator.clipboard?.writeText(text).then(()=>toast(msg)).catch(()=>{ $("#aOut").hidden=false; $("#aOut").textContent=text; toast("Copiá el texto de abajo"); });
-}
-function maybeOpenAdmin(){
-  if(new URLSearchParams(location.search).get("admin") === "1"){
-    $("#admin").classList.add("open");
-  }
 }
 
 /* ---------- GALERÍA DE OBRAS ---------- */
@@ -1139,14 +1096,11 @@ document.addEventListener("keydown", e => {
 });
 
 /* ---------- init ---------- */
-applyUrlDiscounts();
 loadAnalytics();
 wireBrand();
 renderDesigns();
 renderPromo();
 watchDesignViews();
-buildAdmin();
-maybeOpenAdmin();
 wireGalleryToggle();
 renderGallery();
 track("page_view", {});
